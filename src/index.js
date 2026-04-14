@@ -45,6 +45,7 @@ import Notification from '../packages/notification/index.js';
 import Slider from '../packages/slider/index.js';
 import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
+import Image from '../packages/image/index.js';
 import Row from '../packages/row/index.js';
 import Col from '../packages/col/index.js';
 import Upload from '../packages/upload/index.js';
@@ -69,6 +70,7 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
+import Divider from '../packages/divider/index.js';
 import Timeline from '../packages/timeline/index.js';
 import TimelineItem from '../packages/timeline-item/index.js';
 import locale from 'element-ui/src/locale';
@@ -117,6 +119,7 @@ const components = [
   Alert,
   Slider,
   Icon,
+  Image,
   Row,
   Col,
   Upload,
@@ -140,6 +143,7 @@ const components = [
   Aside,
   Main,
   Footer,
+  Divider,
   Timeline,
   TimelineItem,
   CollapseTransition
@@ -226,6 +230,7 @@ export default {
   Notification,
   Slider,
   Icon,
+  Image,
   Row,
   Col,
   Upload,
@@ -250,6 +255,7 @@ export default {
   Aside,
   Main,
   Footer,
+  Divider,
   Timeline,
   TimelineItem
 };

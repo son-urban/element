@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Element UI Dev Test</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../src/UrbanA/ui/css/style/theme/index.css">
+  <style>
+    body { font-family: Helvetica, Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+    .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    h2 { margin-top: 0; color: #409EFF; }
+    .result { margin-top: 10px; padding: 10px; background: #f0f9eb; border-radius: 4px; font-size: 13px; }
+
+    /* Custom classes added to el-input-number source */
+    .el-input-number.is-at-min .el-input__inner { border-color: #F56C6C; background-color: #fef0f0; }
+    .el-input-number.is-at-max .el-input__inner { border-color: #E6A23C; background-color: #fdf6ec; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Element UI Dev Build Test</h1>
+    <p>Version: {{ elementVersion }}</p>
+
+    <!-- Input Number -->
+    <div class="section">
+      <h2>el-input-number</h2>
+      <el-form label-width="150px" size="mini">
+        <el-form-item label="Building Height">
+          <el-input-number v-model="height" :min="1" :max="100" :step="0.5"></el-input-number>
+          m
+        </el-form-item>
+        <el-form-item label="Floor Count">
+          <el-input-number v-model="floors" :min="1" :max="50"></el-input-number>
+        </el-form-item>
+      </el-form>
+      <div class="result">Height: {{ height }}m | Floors: {{ floors }} | Per floor: {{ (height / floors).toFixed(2) }}m</div>
+    </div>
+
+    <!-- Color Picker -->
+    <div class="section">
+      <h2>el-color-picker</h2>
+      <el-form label-width="150px" size="mini">
+        <el-form-item label="Wall Color">
+          <el-color-picker v-model="wallColor"></el-color-picker>
+        </el-form-item>
+        <el-form-item label="Roof Color">
+          <el-color-picker v-model="roofColor" show-alpha></el-color-picker>
+        </el-form-item>
+      </el-form>
+      <div class="result">Wall: {{ wallColor }} | Roof: {{ roofColor }}</div>
+    </div>
+
+    <!-- Select -->
+    <div class="section">
+      <h2>el-select</h2>
+      <el-form label-width="150px" size="mini">
+        <el-form-item label="Land Use">
+          <el-select v-model="landUse" placeholder="Select land use">
+            <el-option label="Residential" value="residential"></el-option>
+            <el-option label="Commercial" value="commercial"></el-option>
+            <el-option label="Mixed Use" value="mixed"></el-option>
+            <el-option label="Industrial" value="industrial"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div class="result">Selected: {{ landUse || 'none' }}</div>
+    </div>
+
+    <!-- Switch + Radio -->
+    <div class="section">
+      <h2>el-switch & el-radio</h2>
+      <el-form label-width="150px" size="mini">
+        <el-form-item label="Show Roof">
+          <el-switch v-model="showRoof"></el-switch>
+        </el-form-item>
+        <el-form-item label="Roof Type">
+          <el-radio-group v-model="roofType" :disabled="!showRoof">
+            <el-radio-button label="flat">Flat</el-radio-button>
+            <el-radio-button label="gable">Gable</el-radio-button>
+            <el-radio-button label="hip">Hip</el-radio-button>
+          </el-radio-group>
+        </el-form-item>
+      </el-form>
+      <div class="result">Roof: {{ showRoof ? roofType : 'hidden' }}</div>
+    </div>
+
+    <!-- Tabs + Dialog -->
+    <div class="section">
+      <h2>el-tabs & el-dialog</h2>
+      <el-tabs v-model="activeTab" type="border-card">
+        <el-tab-pane label="General" name="general">
+          <p>General building settings here.</p>
+          <el-button type="primary" size="mini" @click="dialogVisible = true">Open Details</el-button>
+        </el-tab-pane>
+        <el-tab-pane label="Materials" name="materials">
+          <p>Material configuration here.</p>
+        </el-tab-pane>
+        <el-tab-pane label="Survey" name="survey">
+          <p>Survey data here.</p>
+        </el-tab-pane>
+      </el-tabs>
+
+      <el-dialog title="Building Details" :visible.sync="dialogVisible" width="400px">
+        <p>Height: {{ height }}m</p>
+        <p>Floors: {{ floors }}</p>
+        <p>Land Use: {{ landUse }}</p>
+        <span slot="footer">
+          <el-button size="mini" @click="dialogVisible = false">Close</el-button>
+        </span>
+      </el-dialog>
+    </div>
+
+    <!-- Tooltip + Badge + Dropdown -->
+    <div class="section">
+      <h2>el-tooltip, el-badge, el-dropdown</h2>
+      <el-tooltip content="Click for options" placement="top">
+        <el-dropdown trigger="click">
+          <el-badge :value="3" class="item">
+            <el-button size="mini" icon="el-icon-menu">Menu</el-button>
+          </el-badge>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>Export to Excel</el-dropdown-item>
+            <el-dropdown-item>Export to CAD</el-dropdown-item>
+            <el-dropdown-item>Reload Data</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-tooltip>
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="../src/UrbanA/ui/js/vue.js"></script>
+  <script type="text/javascript" src="../src/UrbanA/ui/js/element_ui.js"></script>
+  <script type="text/javascript" src="../src/UrbanA/ui/js/element_ui_en.js"></script>
+  <script>
+    ELEMENT.locale(ELEMENT.lang.en);
+
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+          height: 12,
+          floors: 4,
+          wallColor: '#409EFF',
+          roofColor: 'rgba(255, 69, 0, 0.8)',
+          landUse: 'residential',
+          showRoof: true,
+          roofType: 'gable',
+          activeTab: 'general',
+          dialogVisible: false
+        };
+      },
+      computed: {
+        elementVersion: function() {
+          return ELEMENT.version || 'unknown';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

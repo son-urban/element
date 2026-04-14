@@ -1,0 +1,33 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(image) {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: $--background-color-base;
+  color: $--color-text-secondary;
+
+  @include e(inner) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(error) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    background: $--background-color-base;
+  }
+
+  @include e(placeholder) {
+    width: 100%;
+    height: 100%;
+  }
+}
