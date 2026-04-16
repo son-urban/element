@@ -357,6 +357,29 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
+
+    @include when(nil) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: none;
+      pointer-events: none;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -10%;
+        right: -10%;
+        height: 1.5px;
+        background: #c0c4cc;
+        transform: translateY(-50%) rotate(-45deg);
+        transform-origin: center;
+      }
+    }
   }
 
   @include e(icon) {
